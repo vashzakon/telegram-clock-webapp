@@ -1,298 +1,510 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>Chú khỉ con và quả chuối vàng</title>
-<style>
-  body{font-family:Arial,sans-serif;line-height:1.6;padding:20px;background:#fffbe6;}
-  h2{text-align:center;color:#006633;}
-  p{margin-bottom:1em;}
-  .word{
-    position:relative;
-    color:#006633;
-    cursor:pointer;
-    border-bottom:1px dotted #006633;
-  }
-  .word::after{
-    content:attr(data-vi) " — " attr(data-ru);
-    position:absolute;
-    left:0;top:120%;
-    background:#fff8dc;
-    border:1px solid #ccc;
-    padding:6px 10px;
-    font-size:0.9em;
-    color:#333;
-    white-space:nowrap;
-    opacity:0;
-    transition:opacity .2s;
-    pointer-events:none;
-    z-index:10;
-    box-shadow:2px 2px 4px rgba(0,0,0,0.2);
-  }
-  .word:hover::after{opacity:1;}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Chú khỉ con và quả chuối vàng</title>
+  <!-- Подключение Telegram Web App API -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    /* Адаптация для мобильных устройств */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 16px;
+      background: #fffbe6;
+      color: #333;
+      font-size: 16px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    
+    h2 {
+      text-align: center;
+      color: #006633;
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    
+    p {
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+    
+    .word {
+      position: relative;
+      color: #006633;
+      cursor: pointer;
+      border-bottom: 1px dotted #006633;
+      display: inline-block;
+      margin: 0 2px;
+    }
+    
+    .word::after {
+      content: attr(data-vi) " — " attr(data-ru);
+      position: absolute;
+      left: 50%;
+      top: -40px;
+      transform: translateX(-50%);
+      background: #fff8dc;
+      border: 1px solid #ccc;
+      padding: 6px 10px;
+      font-size: 14px;
+      color: #333;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity .2s;
+      pointer-events: none;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      border-radius: 4px;
+    }
+    
+    .word:hover::after {
+      opacity: 1;
+    }
+    
+    /* Стили для Telegram Web App */
+    .tg-info {
+      background: #e6f7ff;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 20px 0;
+      border-left: 4px solid #1e9fff;
+      font-size: 14px;
+    }
+    
+    .tg-button {
+      background: #3390ec;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      width: 100%;
+      margin: 15px 0;
+      transition: background 0.3s;
+    }
+    
+    .tg-button:hover {
+      background: #1e88e5;
+    }
+    
+    .tg-button:active {
+      background: #1976d2;
+    }
+    
+    .tg-close {
+      background: #f5f5f5;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+    
+    /* Адаптация для темной темы Telegram */
+    body.tg-dark {
+      background: #1c1c1d;
+      color: #e6e6e6;
+    }
+    
+    body.tg-dark .word {
+      color: #4caf50;
+      border-bottom-color: #4caf50;
+    }
+    
+    body.tg-dark .word::after {
+      background: #2d2d2d;
+      border-color: #555;
+      color: #fff;
+    }
+    
+    body.tg-dark h2 {
+      color: #4caf50;
+    }
+    
+    body.tg-dark .tg-info {
+      background: #2a2a2a;
+      border-left-color: #4caf50;
+    }
+    
+    /* Адаптация для очень маленьких экранов */
+    @media (max-width: 350px) {
+      body {
+        padding: 12px;
+        font-size: 15px;
+      }
+      
+      h2 {
+        font-size: 20px;
+      }
+      
+      .word::after {
+        font-size: 12px;
+        padding: 4px 8px;
+        top: -35px;
+      }
+    }
+    
+    /* Адаптация для горизонтальной ориентации */
+    @media (orientation: landscape) and (max-height: 500px) {
+      body {
+        padding: 10px;
+      }
+      
+      h2 {
+        font-size: 20px;
+        margin-bottom: 12px;
+      }
+      
+      p {
+        margin-bottom: 12px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<h2>Chú khỉ con và quả chuối vàng</h2>
+<div class="container">
+  <h2>Chú khỉ con và quả chuối vàng</h2>
+  
+  <div class="tg-info" id="tg-info" style="display: none;">
+    <!-- Информация о пользователе Telegram будет отображаться здесь -->
+  </div>
 
-<p>
-<span class="word" data-vi="Trong" data-ru="в" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Trong">Trong</span> 
-<span class="word" data-vi="một" data-ru="одном" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
-<span class="word" data-vi="khu rừng" data-ru="лесу" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=khu%20rừng">khu rừng</span> 
-<span class="word" data-vi="nhiệt đới" data-ru="тропическом" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhiệt%20đới">nhiệt đới</span>, 
-<span class="word" data-vi="có" data-ru="есть" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=có">có</span> 
-<span class="word" data-vi="một" data-ru="одна" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
-<span class="word" data-vi="chú khỉ" data-ru="обезьяна" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chú%20khỉ">chú khỉ</span> 
-<span class="word" data-vi="con" data-ru="маленькая" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=con">con</span> 
-<span class="word" data-vi="tên" data-ru="по имени" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=tên">tên</span> 
-<span class="word" data-vi="là" data-ru="есть" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=là">là</span> 
-<span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span>.
-</p>
+  <p>
+    <span class="word" data-vi="Trong" data-ru="в" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Trong">Trong</span> 
+    <span class="word" data-vi="một" data-ru="одном" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
+    <span class="word" data-vi="khu rừng" data-ru="лесу" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=khu%20rừng">khu rừng</span> 
+    <span class="word" data-vi="nhiệt đới" data-ru="тропическом" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhiệt%20đới">nhiệt đới</span>, 
+    <span class="word" data-vi="có" data-ru="есть" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=có">có</span> 
+    <span class="word" data-vi="một" data-ru="одна" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
+    <span class="word" data-vi="chú khỉ" data-ru="обезьяна" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chú%20khỉ">chú khỉ</span> 
+    <span class="word" data-vi="con" data-ru="маленькая" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=con">con</span> 
+    <span class="word" data-vi="tên" data-ru="по имени" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=tên">tên</span> 
+    <span class="word" data-vi="là" data-ru="есть" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=là">là</span> 
+    <span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span>.
+  </p>
 
-<p>
-<span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
-<span class="word" data-vi="rất" data-ru="очень" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rất">rất</span> 
-<span class="word" data-vi="thích" data-ru="любит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=thích">thích</span> 
-<span class="word" data-vi="ăn" data-ru="есть" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ăn">ăn</span> 
-<span class="word" data-vi="chuối" data-ru="бананы" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chuối">chuối</span>. 
-<span class="word" data-vi="Mỗi ngày" data-ru="каждый день" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mỗi%20ngày">Mỗi ngày</span>, 
-<span class="word" data-vi="nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nó">nó</span> 
-<span class="word" data-vi="tìm" data-ru="ищет" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=tìm">tìm</span> 
-<span class="word" data-vi="chuối" data-ru="бананы" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chuối">chuối</span> 
-<span class="word" data-vi="trên cây" data-ru="на деревьях" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trên%20cây">trên cây</span>.
-</p>
+  <p>
+    <span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
+    <span class="word" data-vi="rất" data-ru="очень" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rất">rất</span> 
+    <span class="word" data-vi="thích" data-ru="любит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=thích">thích</span> 
+    <span class="word" data-vi="ăn" data-ru="есть" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ăn">ăn</span> 
+    <span class="word" data-vi="chuối" data-ru="бананы" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chuối">chuối</span>. 
+    <span class="word" data-vi="Mỗi ngày" data-ru="каждый день" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mỗi%20ngày">Mỗi ngày</span>, 
+    <span class="word" data-vi="nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nó">nó</span> 
+    <span class="word" data-vi="tìm" data-ru="ищет" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=tìm">tìm</span> 
+    <span class="word" data-vi="chuối" data-ru="бананы" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chuối">chuối</span> 
+    <span class="word" data-vi="trên cây" data-ru="на деревьях" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trên%20cây">trên cây</span>.
+  </p>
 
-<p>
-<span class="word" data-vi="Một" data-ru="однажды" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Một">Một</span> 
-<span class="word" data-vi="buổi sáng" data-ru="утром" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=buổi%20sáng">buổi sáng</span>, 
-<span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
-<span class="word" data-vi="nghe" data-ru="слышит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nghe">nghe</span> 
-<span class="word" data-vi="một" data-ru="один" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
-<span class="word" data-vi="tiếng nói" data-ru="голос" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=tiếng%20nói">tiếng nói</span> 
-<span class="word" data-vi="kỳ lạ" data-ru="странный" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=kỳ%20lạ">kỳ lạ</span> 
-<span class="word" data-vi="từ" data-ru="из" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=từ">từ</span> 
-<span class="word" data-vi="phía xa" data-ru="издалека" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=phía%20xa">phía xa</span>.
-</p>
+  <p>
+    <span class="word" data-vi="Một" data-ru="однажды" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Một">Một</span> 
+    <span class="word" data-vi="buổi sáng" data-ru="утром" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=buổi%20sáng">buổi sáng</span>, 
+    <span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
+    <span class="word" data-vi="nghe" data-ru="слышит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nghe">nghe</span> 
+    <span class="word" data-vi="một" data-ru="один" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
+    <span class="word" data-vi="tiếng nói" data-ru="голос" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=tiếng%20nói">tiếng nói</span> 
+    <span class="word" data-vi="kỳ lạ" data-ru="странный" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=kỳ%20lạ">kỳ lạ</span> 
+    <span class="word" data-vi="từ" data-ru="из" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=từ">từ</span> 
+    <span class="word" data-vi="phía xa" data-ru="издалека" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=phía%20xa">phía xa</span>.
+  </p>
 
-<p>
-<span class="word" data-vi="Nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Nó">Nó</span> 
-<span class="word" data-vi="đi" data-ru="идёт" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đi">đi</span> 
-<span class="word" data-vi="theo" data-ru="следом за" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=theo">theo</span> 
-<span class="word" data-vi="tiếng nói" data-ru="голосом" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=tiếng%20nói">tiếng nói</span> 
-<span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
-<span class="word" data-vi="thấy" data-ru="видит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=thấy">thấy</span> 
-<span class="word" data-vi="một" data-ru="одно" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
-<span class="word" data-vi="quả chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=quả%20chuối">quả chuối</span> 
-<span class="word" data-vi="vàng" data-ru="золотой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vàng">vàng</span> 
-<span class="word" data-vi="rực rỡ" data-ru="сияющий" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rực%20rỡ">rực rỡ</span> 
-<span class="word" data-vi="dưới đất" data-ru="на земле" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=dưới%20đất">dưới đất</span>.
-</p>
+  <p>
+    <span class="word" data-vi="Nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Nó">Nó</span> 
+    <span class="word" data-vi="đi" data-ru="идёт" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đi">đi</span> 
+    <span class="word" data-vi="theo" data-ru="следом за" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=theo">theo</span> 
+    <span class="word" data-vi="tiếng nói" data-ru="голосом" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=tiếng%20nói">tiếng nói</span> 
+    <span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
+    <span class="word" data-vi="thấy" data-ru="видит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=thấy">thấy</span> 
+    <span class="word" data-vi="một" data-ru="одно" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
+    <span class="word" data-vi="quả chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=quả%20chuối">quả chuối</span> 
+    <span class="word" data-vi="vàng" data-ru="золотой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vàng">vàng</span> 
+    <span class="word" data-vi="rực rỡ" data-ru="сияющий" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rực%20rỡ">rực rỡ</span> 
+    <span class="word" data-vi="dưới đất" data-ru="на земле" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=dưới%20đất">dưới đất</span>.
+  </p>
 
-<p>
-<span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
-<span class="word" data-vi="rất" data-ru="очень" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rất">rất</span> 
-<span class="word" data-vi="ngạc nhiên" data-ru="удивлена" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ngạc%20nhiên">ngạc nhiên</span>. 
-<span class="word" data-vi="Nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Nó">Nó</span> 
-<span class="word" data-vi="chưa từng" data-ru="никогда не видела" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chưa%20từng">chưa từng</span> 
-<span class="word" data-vi="thấy" data-ru="видела" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=thấy">thấy</span> 
-<span class="word" data-vi="quả chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=quả%20chuối">quả chuối</span> 
-<span class="word" data-vi="vàng" data-ru="золотой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vàng">vàng</span> 
-<span class="word" data-vi="như vậy" data-ru="такой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=như%20vậy">như vậy</span> 
-<span class="word" data-vi="bao giờ" data-ru="никогда" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bao%20giờ">bao giờ</span>.
-</p>
+  <p>
+    <span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
+    <span class="word" data-vi="rất" data-ru="очень" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rất">rất</span> 
+    <span class="word" data-vi="ngạc nhiên" data-ru="удивлена" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ngạc%20nhiên">ngạc nhiên</span>. 
+    <span class="word" data-vi="Nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Nó">Nó</span> 
+    <span class="word" data-vi="chưa từng" data-ru="никогда не видела" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chưa%20từng">chưa từng</span> 
+    <span class="word" data-vi="thấy" data-ru="видела" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=thấy">thấy</span> 
+    <span class="word" data-vi="quả chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=quả%20chuối">quả chuối</span> 
+    <span class="word" data-vi="vàng" data-ru="золотой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vàng">vàng</span> 
+    <span class="word" data-vi="như vậy" data-ru="такой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=như%20vậy">như vậy</span> 
+    <span class="word" data-vi="bao giờ" data-ru="никогда" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bao%20giờ">bao giờ</span>.
+  </p>
 
-<p>
-<span class="word" data-vi="Nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Nó">Nó</span> 
-<span class="word" data-vi="muốn" data-ru="хочет" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=muốn">muốn</span> 
-<span class="word" data-vi="ăn" data-ru="есть" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ăn">ăn</span> 
-<span class="word" data-vi="quả chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=quả%20chuối">quả chuối</span> 
-<span class="word" data-vi="vàng" data-ru="золотой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vàng">vàng</span>. 
-<span class="word" data-vi="Nhưng" data-ru="но" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Nhưng">Nhưng</span> 
-<span class="word" data-vi="nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nó">nó</span> 
-<span class="word" data-vi="không dám" data-ru="не решается" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=không%20dám">không dám</span> 
-<span class="word" data-vi="chạm vào" data-ru="трогать" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chạm%20vào">chạm vào</span>.
-</p>
+  <p>
+    <span class="word" data-vi="Nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Nó">Nó</span> 
+    <span class="word" data-vi="muốn" data-ru="хочет" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=muốn">muốn</span> 
+    <span class="word" data-vi="ăn" data-ru="есть" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ăn">ăn</span> 
+    <span class="word" data-vi="quả chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=quả%20chuối">quả chuối</span> 
+    <span class="word" data-vi="vàng" data-ru="золотой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vàng">vàng</span>. 
+    <span class="word" data-vi="Nhưng" data-ru="но" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Nhưng">Nhưng</span> 
+    <span class="word" data-vi="nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nó">nó</span> 
+    <span class="word" data-vi="không dám" data-ru="не решается" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=không%20dám">không dám</span> 
+    <span class="word" data-vi="chạm vào" data-ru="трогать" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chạm%20vào">chạm vào</span>.
+  </p>
 
-<p>
-<span class="word" data-vi="Bỗng nhiên" data-ru="вдруг" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Bỗng%20nhiên">Bỗng nhiên</span>, 
-<span class="word" data-vi="một" data-ru="один" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
-<span class="word" data-vi="con sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=con%20sóc">con sóc</span> 
-<span class="word" data-vi="nhảy xuống" data-ru="спрыгивает вниз" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhảy%20xuống">nhảy xuống</span> 
-<span class="word" data-vi="từ" data-ru="с" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=từ">từ</span> 
-<span class="word" data-vi="trên cây" data-ru="с дерева" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trên%20cây">trên cây</span>.
-</p>
+  <p>
+    <span class="word" data-vi="Bỗng nhiên" data-ru="вдруг" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Bỗng%20nhiên">Bỗng nhiên</span>, 
+    <span class="word" data-vi="một" data-ru="один" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
+    <span class="word" data-vi="con sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=con%20sóc">con sóc</span> 
+    <span class="word" data-vi="nhảy xuống" data-ru="спрыгивает вниз" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhảy%20xuống">nhảy xuống</span> 
+    <span class="word" data-vi="từ" data-ru="с" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=từ">từ</span> 
+    <span class="word" data-vi="trên cây" data-ru="с дерева" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trên%20cây">trên cây</span>.
+  </p>
 
-<p>
-<span class="word" data-vi="Sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sóc">Sóc</span> 
-<span class="word" data-vi="nói" data-ru="говорит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nói">nói</span> 
-<span class="word" data-vi="với" data-ru="с" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=với">với</span> 
-<span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span>: 
-<span class="word" data-vi="“Bạn" data-ru="ты" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Bạn">“Bạn</span> 
-<span class="word" data-vi="đang" data-ru="сейчас" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đang">đang</span> 
-<span class="word" data-vi="nhìn" data-ru="смотрит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhìn">nhìn</span> 
-<span class="word" data-vi="gì" data-ru="что" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=gì">gì</span> 
-<span class="word" data-vi="vậy?" data-ru="так?" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vậy%3F">vậy?”</span>
-</p>
+  <p>
+    <span class="word" data-vi="Sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sóc">Sóc</span> 
+    <span class="word" data-vi="nói" data-ru="говорит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nói">nói</span> 
+    <span class="word" data-vi="với" data-ru="с" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=với">với</span> 
+    <span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span>: 
+    <span class="word" data-vi="“Bạn" data-ru="ты" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Bạn">“Bạn</span> 
+    <span class="word" data-vi="đang" data-ru="сейчас" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đang">đang</span> 
+    <span class="word" data-vi="nhìn" data-ru="смотрит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhìn">nhìn</span> 
+    <span class="word" data-vi="gì" data-ru="что" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=gì">gì</span> 
+    <span class="word" data-vi="vậy?" data-ru="так?" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vậy%3F">vậy?”</span>
+  </p>
 
-<p>
-<span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
-<span class="word" data-vi="trả lời" data-ru="отвечает" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trả%20lời">trả lời</span>: 
-<span class="word" data-vi="“Tôi" data-ru="я" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Tôi">“Tôi</span> 
-<span class="word" data-vi="thấy" data-ru="вижу" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=thấy">thấy</span> 
-<span class="word" data-vi="một" data-ru="один" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
-<span class="word" data-vi="quả chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=quả%20chuối">quả chuối</span> 
-<span class="word" data-vi="vàng" data-ru="золотой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vàng">vàng</span>. 
-<span class="word" data-vi="Nó" data-ru="он" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Nó">Nó</span> 
-<span class="word" data-vi="rất" data-ru="очень" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rất">rất</span> 
-<span class="word" data-vi="đẹp" data-ru="красивый" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đẹp">đẹp</span>!”
-</p>
+  <p>
+    <span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
+    <span class="word" data-vi="trả lời" data-ru="отвечает" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trả%20lời">trả lời</span>: 
+    <span class="word" data-vi="“Tôi" data-ru="я" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Tôi">“Tôi</span> 
+    <span class="word" data-vi="thấy" data-ru="вижу" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=thấy">thấy</span> 
+    <span class="word" data-vi="một" data-ru="один" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
+    <span class="word" data-vi="quả chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=quả%20chuối">quả chuối</span> 
+    <span class="word" data-vi="vàng" data-ru="золотой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vàng">vàng</span>. 
+    <span class="word" data-vi="Nó" data-ru="он" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Nó">Nó</span> 
+    <span class="word" data-vi="rất" data-ru="очень" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rất">rất</span> 
+    <span class="word" data-vi="đẹp" data-ru="красивый" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đẹp">đẹp</span>!”
+  </p>
 
-<p>
-<span class="word" data-vi="Sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sóc">Sóc</span> 
-<span class="word" data-vi="cười" data-ru="смеётся" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=cười">cười</span> 
-<span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
-<span class="word" data-vi="nói" data-ru="говорит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nói">nói</span>: 
-<span class="word" data-vi="“Đó" data-ru="это" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Đó">“Đó</span> 
-<span class="word" data-vi="không phải" data-ru="не" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=không%20phải">không phải</span> 
-<span class="word" data-vi="là" data-ru="есть" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=là">là</span> 
-<span class="word" data-vi="chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chuối">chuối</span> 
-<span class="word" data-vi="thật" data-ru="настоящий" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=thật">thật</span>. 
-<span class="word" data-vi="Đó" data-ru="это" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Đó">Đó</span> 
-<span class="word" data-vi="là" data-ru="есть" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=là">là</span> 
-<span class="word" data-vi="một" data-ru="один" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
-<span class="word" data-vi="viên đá" data-ru="камень" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=viên%20đá">viên đá</span> 
-<span class="word" data-vi="vàng" data-ru="золотой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vàng">vàng</span>!”
-</p>
+  <p>
+    <span class="word" data-vi="Sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sóc">Sóc</span> 
+    <span class="word" data-vi="cười" data-ru="смеётся" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=cười">cười</span> 
+    <span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
+    <span class="word" data-vi="nói" data-ru="говорит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nói">nói</span>: 
+    <span class="word" data-vi="“Đó" data-ru="это" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Đó">“Đó</span> 
+    <span class="word" data-vi="không phải" data-ru="не" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=không%20phải">không phải</span> 
+    <span class="word" data-vi="là" data-ru="есть" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=là">là</span> 
+    <span class="word" data-vi="chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chuối">chuối</span> 
+    <span class="word" data-vi="thật" data-ru="настоящий" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=thật">thật</span>. 
+    <span class="word" data-vi="Đó" data-ru="это" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Đó">Đó</span> 
+    <span class="word" data-vi="là" data-ru="есть" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=là">là</span> 
+    <span class="word" data-vi="một" data-ru="один" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
+    <span class="word" data-vi="viên đá" data-ru="камень" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=viên%20đá">viên đá</span> 
+    <span class="word" data-vi="vàng" data-ru="золотой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vàng">vàng</span>!”
+  </p>
 
-<p>
-<span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
-<span class="word" data-vi="rất" data-ru="очень" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rất">rất</span> 
-<span class="word" data-vi="buồn" data-ru="грустная" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=buồn">buồn</span>. 
-<span class="word" data-vi="Nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Nó">Nó</span> 
-<span class="word" data-vi="nghĩ" data-ru="думает" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nghĩ">nghĩ</span>: 
-<span class="word" data-vi="“Mình" data-ru="я" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mình">“Mình</span> 
-<span class="word" data-vi="đã" data-ru="уже" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đã">đã</span> 
-<span class="word" data-vi="bị lừa" data-ru="обманута" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bị%20lừa">bị lừa</span> 
-<span class="word" data-vi="rồi" data-ru="уже" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rồi">rồi</span>.”
-</p>
+  <p>
+    <span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
+    <span class="word" data-vi="rất" data-ru="очень" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rất">rất</span> 
+    <span class="word" data-vi="buồn" data-ru="грустная" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=buồn">buồn</span>. 
+    <span class="word" data-vi="Nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Nó">Nó</span> 
+    <span class="word" data-vi="nghĩ" data-ru="думает" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nghĩ">nghĩ</span>: 
+    <span class="word" data-vi="“Mình" data-ru="я" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mình">“Mình</span> 
+    <span class="word" data-vi="đã" data-ru="уже" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đã">đã</span> 
+    <span class="word" data-vi="bị lừa" data-ru="обманута" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bị%20lừa">bị lừa</span> 
+    <span class="word" data-vi="rồi" data-ru="уже" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rồi">rồi</span>.”
+  </p>
 
-<p>
-<span class="word" data-vi="Sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sóc">Sóc</span> 
-<span class="word" data-vi="thấy" data-ru="видит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=thấy">thấy</span> 
-<span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
-<span class="word" data-vi="buồn" data-ru="грустную" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=buồn">buồn</span> 
-<span class="word" data-vi="nên" data-ru="поэтому" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nên">nên</span> 
-<span class="word" data-vi="nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nó">nó</span> 
-<span class="word" data-vi="nói" data-ru="говорит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nói">nói</span>: 
-<span class="word" data-vi="“Đừng" data-ru="не" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Đừng">“Đừng</span> 
-<span class="word" data-vi="buồn" data-ru="грусти" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=buồn">buồn</span> 
-<span class="word" data-vi="nữa" data-ru="больше" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nữa">nữa</span>. 
-<span class="word" data-vi="Tôi" data-ru="я" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Tôi">Tôi</span> 
-<span class="word" data-vi="sẽ" data-ru="буду" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=sẽ">sẽ</span> 
-<span class="word" data-vi="cho" data-ru="дам" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=cho">cho</span> 
-<span class="word" data-vi="bạn" data-ru="тебе" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bạn">bạn</span> 
-<span class="word" data-vi="một" data-ru="один" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
-<span class="word" data-vi="quả chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=quả%20chuối">quả chuối</span> 
-<span class="word" data-vi="thật" data-ru="настоящий" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=thật">thật</span>.”
-</p>
+  <p>
+    <span class="word" data-vi="Sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sóc">Sóc</span> 
+    <span class="word" data-vi="thấy" data-ru="видит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=thấy">thấy</span> 
+    <span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
+    <span class="word" data-vi="buồn" data-ru="грустную" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=buồn">buồn</span> 
+    <span class="word" data-vi="nên" data-ru="поэтому" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nên">nên</span> 
+    <span class="word" data-vi="nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nó">nó</span> 
+    <span class="word" data-vi="nói" data-ru="говорит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nói">nói</span>: 
+    <span class="word" data-vi="“Đừng" data-ru="не" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Đừng">“Đừng</span> 
+    <span class="word" data-vi="buồn" data-ru="грусти" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=buồn">buồn</span> 
+    <span class="word" data-vi="nữa" data-ru="больше" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nữa">nữa</span>. 
+    <span class="word" data-vi="Tôi" data-ru="я" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Tôi">Tôi</span> 
+    <span class="word" data-vi="sẽ" data-ru="буду" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=sẽ">sẽ</span> 
+    <span class="word" data-vi="cho" data-ru="дам" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=cho">cho</span> 
+    <span class="word" data-vi="bạn" data-ru="тебе" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bạn">bạn</span> 
+    <span class="word" data-vi="một" data-ru="один" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
+    <span class="word" data-vi="quả chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=quả%20chuối">quả chuối</span> 
+    <span class="word" data-vi="thật" data-ru="настоящий" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=thật">thật</span>.”
+  </p>
 
-<p>
-<span class="word" data-vi="Vậy là" data-ru="так что" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Vậy%20là">Vậy là</span>, 
-<span class="word" data-vi="Sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sóc">Sóc</span> 
-<span class="word" data-vi="đưa" data-ru="даёт" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đưa">đưa</span> 
-<span class="word" data-vi="cho" data-ru="для" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=cho">cho</span> 
-<span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
-<span class="word" data-vi="một" data-ru="один" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
-<span class="word" data-vi="quả chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=quả%20chuối">quả chuối</span> 
-<span class="word" data-vi="ngon" data-ru="вкусный" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ngon">ngon</span>.
-</p>
+  <p>
+    <span class="word" data-vi="Vậy là" data-ru="так что" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Vậy%20là">Vậy là</span>, 
+    <span class="word" data-vi="Sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sóc">Sóc</span> 
+    <span class="word" data-vi="đưa" data-ru="даёт" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đưa">đưa</span> 
+    <span class="word" data-vi="cho" data-ru="для" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=cho">cho</span> 
+    <span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
+    <span class="word" data-vi="một" data-ru="один" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
+    <span class="word" data-vi="quả chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=quả%20chuối">quả chuối</span> 
+    <span class="word" data-vi="ngon" data-ru="вкусный" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ngon">ngon</span>.
+  </p>
 
-<p>
-<span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
-<span class="word" data-vi="rất" data-ru="очень" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rất">rất</span> 
-<span class="word" data-vi="vui mừng" data-ru="радостна" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vui%20mừng">vui mừng</span>. 
-<span class="word" data-vi="Nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Nó">Nó</span> 
-<span class="word" data-vi="ăn" data-ru="ест" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ăn">ăn</span> 
-<span class="word" data-vi="chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chuối">chuối</span> 
-<span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
-<span class="word" data-vi="cảm thấy" data-ru="чувствует" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=cảm%20thấy">cảm thấy</span> 
-<span class="word" data-vi="rất" data-ru="очень" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rất">rất</span> 
-<span class="word" data-vi="ngon" data-ru="вкусно" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ngon">ngon</span>.
-</p>
+  <p>
+    <span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
+    <span class="word" data-vi="rất" data-ru="очень" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rất">rất</span> 
+    <span class="word" data-vi="vui mừng" data-ru="радостна" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vui%20mừng">vui mừng</span>. 
+    <span class="word" data-vi="Nó" data-ru="она" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Nó">Nó</span> 
+    <span class="word" data-vi="ăn" data-ru="ест" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ăn">ăn</span> 
+    <span class="word" data-vi="chuối" data-ru="банан" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chuối">chuối</span> 
+    <span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
+    <span class="word" data-vi="cảm thấy" data-ru="чувствует" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=cảm%20thấy">cảm thấy</span> 
+    <span class="word" data-vi="rất" data-ru="очень" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rất">rất</span> 
+    <span class="word" data-vi="ngon" data-ru="вкусно" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ngon">ngon</span>.
+  </p>
 
-<p>
-<span class="word" data-vi="Sau đó" data-ru="потом" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sau%20đó">Sau đó</span>, 
-<span class="word" data-vi="hai" data-ru="две" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=hai">hai</span> 
-<span class="word" data-vi="bạn" data-ru="друга" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bạn">bạn</span> 
-<span class="word" data-vi="cùng nhau" data-ru="вместе" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=cùng%20nhau">cùng nhau</span> 
-<span class="word" data-vi="đi chơi" data-ru="идут играть" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đi%20chơi">đi chơi</span> 
-<span class="word" data-vi="trong rừng" data-ru="в лесу" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trong%20rừng">trong rừng</span>. 
-<span class="word" data-vi="Chúng" data-ru="они" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Chúng">Chúng</span> 
-<span class="word" data-vi="hát" data-ru="поют" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=hát">hát</span> 
-<span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
-<span class="word" data-vi="nhảy múa" data-ru="танцуют" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhảy%20múa">nhảy múa</span> 
-<span class="word" data-vi="rất vui" data-ru="очень весело" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rất%20vui">rất vui</span>.
-</p>
+  <p>
+    <span class="word" data-vi="Sau đó" data-ru="потом" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sau%20đó">Sau đó</span>, 
+    <span class="word" data-vi="hai" data-ru="две" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=hai">hai</span> 
+    <span class="word" data-vi="bạn" data-ru="друга" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bạn">bạn</span> 
+    <span class="word" data-vi="cùng nhau" data-ru="вместе" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=cùng%20nhau">cùng nhau</span> 
+    <span class="word" data-vi="đi chơi" data-ru="идут играть" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đi%20chơi">đi chơi</span> 
+    <span class="word" data-vi="trong rừng" data-ru="в лесу" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trong%20rừng">trong rừng</span>. 
+    <span class="word" data-vi="Chúng" data-ru="они" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Chúng">Chúng</span> 
+    <span class="word" data-vi="hát" data-ru="поют" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=hát">hát</span> 
+    <span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
+    <span class="word" data-vi="nhảy múa" data-ru="танцуют" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhảy%20múa">nhảy múa</span> 
+    <span class="word" data-vi="rất vui" data-ru="очень весело" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rất%20vui">rất vui</span>.
+  </p>
 
-<p>
-<span class="word" data-vi="Khi" data-ru="когда" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Khi">Khi</span> 
-<span class="word" data-vi="mặt trời" data-ru="солнце" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=mặt%20trời">mặt trời</span> 
-<span class="word" data-vi="lặn" data-ru="садится" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=lặn">lặn</span>, 
-<span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
-<span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
-<span class="word" data-vi="Sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sóc">Sóc</span> 
-<span class="word" data-vi="trở về" data-ru="возвращаются" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trở%20về">trở về</span> 
-<span class="word" data-vi="nhà" data-ru="домой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhà">nhà</span>. 
-<span class="word" data-vi="Chúng" data-ru="они" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Chúng">Chúng</span> 
-<span class="word" data-vi="hẹn gặp lại" data-ru="обещают встретиться снова" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=hẹn%20gặp%20lại">hẹn gặp lại</span> 
-<span class="word" data-vi="ngày mai" data-ru="завтра" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ngày%20mai">ngày mai</span>.
-</p>
+  <p>
+    <span class="word" data-vi="Khi" data-ru="когда" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Khi">Khi</span> 
+    <span class="word" data-vi="mặt trời" data-ru="солнце" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=mặt%20trời">mặt trời</span> 
+    <span class="word" data-vi="lặn" data-ru="садится" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=lặn">lặn</span>, 
+    <span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
+    <span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
+    <span class="word" data-vi="Sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sóc">Sóc</span> 
+    <span class="word" data-vi="trở về" data-ru="возвращаются" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trở%20về">trở về</span> 
+    <span class="word" data-vi="nhà" data-ru="домой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhà">nhà</span>. 
+    <span class="word" data-vi="Chúng" data-ru="они" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Chúng">Chúng</span> 
+    <span class="word" data-vi="hẹn gặp lại" data-ru="обещают встретиться снова" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=hẹn%20gặp%20lại">hẹn gặp lại</span> 
+    <span class="word" data-vi="ngày mai" data-ru="завтра" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ngày%20mai">ngày mai</span>.
+  </p>
 
-<p>
-<span class="word" data-vi="Từ đó" data-ru="с тех пор" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Từ%20đó">Từ đó</span>, 
-<span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
-<span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
-<span class="word" data-vi="Sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sóc">Sóc</span> 
-<span class="word" data-vi="trở thành" data-ru="становятся" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trở%20thành">trở thành</span> 
-<span class="word" data-vi="bạn thân" data-ru="лучшими друзьями" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bạn%20thân">bạn thân</span>. 
-<span class="word" data-vi="Chúng" data-ru="они" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Chúng">Chúng</span> 
-<span class="word" data-vi="luôn" data-ru="всегда" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=luôn">luôn</span> 
-<span class="word" data-vi="giúp đỡ" data-ru="помогают" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=giúp%20đỡ">giúp đỡ</span> 
-<span class="word" data-vi="nhau" data-ru="друг другу" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhau">nhau</span> 
-<span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
-<span class="word" data-vi="chia sẻ" data-ru="делятся" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chia%20sẻ">chia sẻ</span> 
-<span class="word" data-vi="đồ ăn" data-ru="едой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đồ%20ăn">đồ ăn</span>.
-</p>
+  <p>
+    <span class="word" data-vi="Từ đó" data-ru="с тех пор" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Từ%20đó">Từ đó</span>, 
+    <span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
+    <span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
+    <span class="word" data-vi="Sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sóc">Sóc</span> 
+    <span class="word" data-vi="trở thành" data-ru="становятся" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trở%20thành">trở thành</span> 
+    <span class="word" data-vi="bạn thân" data-ru="лучшими друзьями" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bạn%20thân">bạn thân</span>. 
+    <span class="word" data-vi="Chúng" data-ru="они" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Chúng">Chúng</span> 
+    <span class="word" data-vi="luôn" data-ru="всегда" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=luôn">luôn</span> 
+    <span class="word" data-vi="giúp đỡ" data-ru="помогают" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=giúp%20đỡ">giúp đỡ</span> 
+    <span class="word" data-vi="nhau" data-ru="друг другу" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhau">nhau</span> 
+    <span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
+    <span class="word" data-vi="chia sẻ" data-ru="делятся" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chia%20sẻ">chia sẻ</span> 
+    <span class="word" data-vi="đồ ăn" data-ru="едой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đồ%20ăn">đồ ăn</span>.
+  </p>
 
-<p>
-<span class="word" data-vi="Bài học" data-ru="урок" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Bài%20học">Bài học</span> 
-<span class="word" data-vi="của" data-ru="этой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=của">của</span> 
-<span class="word" data-vi="câu chuyện" data-ru="истории" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=câu%20chuyện">câu chuyện</span> 
-<span class="word" data-vi="là" data-ru="это" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=là">là</span>: 
-<span class="word" data-vi="đừng tin" data-ru="не верь" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đừng%20tin">đừng tin</span> 
-<span class="word" data-vi="vào" data-ru="в" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vào">vào</span> 
-<span class="word" data-vi="vẻ ngoài" data-ru="внешность" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vẻ%20ngoài">vẻ ngoài</span> 
-<span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
-<span class="word" data-vi="luôn" data-ru="всегда" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=luôn">luôn</span> 
-<span class="word" data-vi="giúp đỡ" data-ru="помогай" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=giúp%20đỡ">giúp đỡ</span> 
-<span class="word" data-vi="bạn bè" data-ru="друзьям" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bạn%20bè">bạn bè</span>. 
-<span class="word" data-vi="Cám ơn" data-ru="спасибо" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Cám%20ơn">Cám ơn</span> 
-<span class="word" data-vi="bạn" data-ru="тебе" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bạn">bạn</span> 
-<span class="word" data-vi="đã" data-ru="уже" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đã">đã</span> 
-<span class="word" data-vi="đọc" data-ru="прочитал" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đọc">đọc</span>!
-</p>
+  <p>
+    <span class="word" data-vi="Bài học" data-ru="урок" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Bài%20học">Bài học</span> 
+    <span class="word" data-vi="của" data-ru="этой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=của">của</span> 
+    <span class="word" data-vi="câu chuyện" data-ru="истории" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=câu%20chuyện">câu chuyện</span> 
+    <span class="word" data-vi="là" data-ru="это" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=là">là</span>: 
+    <span class="word" data-vi="đừng tin" data-ru="не верь" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đừng%20tin">đừng tin</span> 
+    <span class="word" data-vi="vào" data-ru="в" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vào">vào</span> 
+    <span class="word" data-vi="vẻ ngoài" data-ru="внешность" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vẻ%20ngoài">vẻ ngoài</span> 
+    <span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
+    <span class="word" data-vi="luôn" data-ru="всегда" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=luôn">luôn</span> 
+    <span class="word" data-vi="giúp đỡ" data-ru="помогай" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=giúp%20đỡ">giúp đỡ</span> 
+    <span class="word" data-vi="bạn bè" data-ru="друзьям" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bạn%20bè">bạn bè</span>. 
+    <span class="word" data-vi="Cám ơn" data-ru="спасибо" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Cám%20ơn">Cám ơn</span> 
+    <span class="word" data-vi="bạn" data-ru="тебе" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bạn">bạn</span> 
+    <span class="word" data-vi="đã" data-ru="уже" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đã">đã</span> 
+    <span class="word" data-vi="đọc" data-ru="прочитал" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đọc">đọc</span>!
+  </p>
+
+  <!-- Кнопки управления Telegram Web App -->
+  <button class="tg-button" id="mainButton" style="display: none;">Закрыть приложение</button>
+  <button class="tg-button tg-close" id="closeButton" style="display: none;">Закрыть</button>
+</div>
 
 <script>
-document.querySelectorAll('.word').forEach(el => {
-  const url = el.dataset.audio;
-  const audio = new Audio(url);
-  el.addEventListener('mouseenter', () => {
-    audio.currentTime = 0;
-    audio.play().catch(e => console.log("Ошибка воспроизведения:", e));
-  });
-  el.addEventListener('mouseleave', () => {
-    audio.pause();
+// Инициализация Telegram Web App
+document.addEventListener('DOMContentLoaded', () => {
+  // Проверка, что мы в Telegram Web App
+  if (window.Telegram && window.Telegram.WebApp) {
+    const webApp = window.Telegram.WebApp;
+    
+    // Сообщаем Telegram, что приложение готово
+    webApp.ready();
+    
+    // Расширяем приложение на весь экран
+    webApp.expand();
+    
+    // Получаем информацию о пользователе
+    const user = webApp.initDataUnsafe.user;
+    const theme = webApp.colorScheme;
+    
+    // Адаптация под тему Telegram
+    if (theme === 'dark') {
+      document.body.classList.add('tg-dark');
+    }
+    
+    // Отображение информации о пользователе
+    if (user) {
+      const tgInfo = document.getElementById('tg-info');
+      tgInfo.innerHTML = `
+        <strong>Привет, ${user.first_name}!</strong><br>
+        Это приложение запущено в Telegram.<br>
+        Ваш ID: ${user.id}
+      `;
+      tgInfo.style.display = 'block';
+    }
+    
+    // Настройка главной кнопки
+    const mainButton = webApp.MainButton;
+    if (mainButton) {
+      mainButton.text = "Закрыть приложение";
+      mainButton.show();
+      
+      mainButton.onClick(() => {
+        webApp.close();
+      });
+    }
+    
+    // Настройка кнопки закрытия
+    const closeButton = document.getElementById('closeButton');
+    closeButton.style.display = 'block';
+    closeButton.addEventListener('click', () => {
+      webApp.close();
+    });
+    
+    // Отправка события о запуске приложения
+    webApp.sendData("Приложение запущено пользователем: " + (user ? user.first_name : 'неизвестный'));
+  }
+  
+  // Функциональность воспроизведения аудио при наведении
+  document.querySelectorAll('.word').forEach(el => {
+    const url = el.dataset.audio;
+    const audio = new Audio(url);
+    
+    el.addEventListener('mouseenter', () => {
+      audio.currentTime = 0;
+      audio.play().catch(e => console.log("Ошибка воспроизведения:", e));
+    });
+    
+    el.addEventListener('mouseleave', () => {
+      audio.pause();
+    });
   });
 });
 </script>
