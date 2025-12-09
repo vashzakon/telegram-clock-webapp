@@ -4,10 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Chú khỉ con và quả chuối vàng</title>
-  <!-- Подключение Telegram Web App API -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
-    /* Адаптация для мобильных устройств */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -51,6 +49,13 @@
       border-bottom: 1px dotted #006633;
       display: inline-block;
       margin: 0 2px;
+      padding: 2px 0;
+      transition: all 0.2s;
+    }
+    
+    .word:hover {
+      background-color: rgba(0, 102, 51, 0.1);
+      border-radius: 3px;
     }
     
     .word::after {
@@ -77,12 +82,11 @@
       opacity: 1;
     }
     
-    /* Стили для Telegram Web App */
     .tg-info {
       background: #e6f7ff;
       border-radius: 8px;
       padding: 12px;
-      margin: 20px 0;
+      margin: 10px 0;
       border-left: 4px solid #1e9fff;
       font-size: 14px;
     }
@@ -109,13 +113,19 @@
       background: #1976d2;
     }
     
-    .tg-close {
-      background: #f5f5f5;
-      color: #333;
-      border: 1px solid #ddd;
+    .tg-button:disabled {
+      background: #cccccc;
+      cursor: not-allowed;
     }
     
-    /* Адаптация для темной темы Telegram */
+    .tg-button-success {
+      background: #4CAF50;
+    }
+    
+    .tg-button-success:hover {
+      background: #45a049;
+    }
+    
     body.tg-dark {
       background: #1c1c1d;
       color: #e6e6e6;
@@ -124,6 +134,10 @@
     body.tg-dark .word {
       color: #4caf50;
       border-bottom-color: #4caf50;
+    }
+    
+    body.tg-dark .word:hover {
+      background-color: rgba(76, 175, 80, 0.2);
     }
     
     body.tg-dark .word::after {
@@ -139,9 +153,9 @@
     body.tg-dark .tg-info {
       background: #2a2a2a;
       border-left-color: #4caf50;
+      color: #fff;
     }
     
-    /* Адаптация для очень маленьких экранов */
     @media (max-width: 350px) {
       body {
         padding: 12px;
@@ -158,22 +172,6 @@
         top: -35px;
       }
     }
-    
-    /* Адаптация для горизонтальной ориентации */
-    @media (orientation: landscape) and (max-height: 500px) {
-      body {
-        padding: 10px;
-      }
-      
-      h2 {
-        font-size: 20px;
-        margin-bottom: 12px;
-      }
-      
-      p {
-        margin-bottom: 12px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -181,9 +179,9 @@
 <div class="container">
   <h2>Chú khỉ con và quả chuối vàng</h2>
   
-  <div class="tg-info" id="tg-info" style="display: none;">
-    <!-- Информация о пользователе Telegram будет отображаться здесь -->
-  </div>
+  <div class="tg-info" id="tg-info" style="display: none;"></div>
+
+  <button id="enableSound" class="tg-button">🔊 Включить звук (нажмите перед использованием)</button>
 
   <p>
     <span class="word" data-vi="Trong" data-ru="в" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Trong">Trong</span> 
@@ -269,7 +267,8 @@
     <span class="word" data-vi="con sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=con%20sóc">con sóc</span> 
     <span class="word" data-vi="nhảy xuống" data-ru="спрыгивает вниз" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhảy%20xuống">nhảy xuống</span> 
     <span class="word" data-vi="từ" data-ru="с" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=từ">từ</span> 
-    <span class="word" data-vi="trên cây" data-ru="с дерева" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trên%20cây">trên cây</span>.
+    <sp
+<span class="word" data-vi="trên cây" data-ru="с дерева" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trên%20cây">trên cây</span>.
   </p>
 
   <p>
@@ -322,7 +321,7 @@
     <span class="word" data-vi="nghĩ" data-ru="думает" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nghĩ">nghĩ</span>: 
     <span class="word" data-vi="“Mình" data-ru="я" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mình">“Mình</span> 
     <span class="word" data-vi="đã" data-ru="уже" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đã">đã</span> 
-    <span class="word" data-vi="bị lừa" data-ru="обманута" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bị%20lừa">bị lừa</span> 
+    <span class="word" data-vi="bị lừa" data-ru="обманута" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bị%20lừa">bị lừа</span> 
     <span class="word" data-vi="rồi" data-ru="уже" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=rồi">rồi</span>.”
   </p>
 
@@ -336,7 +335,7 @@
     <span class="word" data-vi="nói" data-ru="говорит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nói">nói</span>: 
     <span class="word" data-vi="“Đừng" data-ru="не" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Đừng">“Đừng</span> 
     <span class="word" data-vi="buồn" data-ru="грусти" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=buồn">buồn</span> 
-    <span class="word" data-vi="nữa" data-ru="больше" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nữa">nữa</span>. 
+    <span class="word" data-vi="nữa" data-ru="больше" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nữa">nữа</span>. 
     <span class="word" data-vi="Tôi" data-ru="я" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Tôi">Tôi</span> 
     <span class="word" data-vi="sẽ" data-ru="буду" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=sẽ">sẽ</span> 
     <span class="word" data-vi="cho" data-ru="дам" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=cho">cho</span> 
@@ -349,7 +348,7 @@
   <p>
     <span class="word" data-vi="Vậy là" data-ru="так что" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Vậy%20là">Vậy là</span>, 
     <span class="word" data-vi="Sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sóc">Sóc</span> 
-    <span class="word" data-vi="đưa" data-ru="даёт" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đưa">đưa</span> 
+    <span class="word" data-vi="đưa" data-ru="даёт" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đưa">đưа</span> 
     <span class="word" data-vi="cho" data-ru="для" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=cho">cho</span> 
     <span class="word" data-vi="Mít" data-ru="Мит" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Mít">Mít</span> 
     <span class="word" data-vi="một" data-ru="один" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=một">một</span> 
@@ -393,7 +392,7 @@
     <span class="word" data-vi="Sóc" data-ru="белка" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Sóc">Sóc</span> 
     <span class="word" data-vi="trở về" data-ru="возвращаются" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=trở%20về">trở về</span> 
     <span class="word" data-vi="nhà" data-ru="домой" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhà">nhà</span>. 
-    <span class="word" data-vi="Chúng" data-ru="они" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Chúng">Chúng</span> 
+    <span class="word" data-vi="Chúng" data-ru="они" data-audio="https://translate.google.com/translate_twt?ie=UTF-8&tl=vi&client=gtx&q=Chúng">Chúng</span> 
     <span class="word" data-vi="hẹn gặp lại" data-ru="обещают встретиться снова" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=hẹn%20gặp%20lại">hẹn gặp lại</span> 
     <span class="word" data-vi="ngày mai" data-ru="завтра" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=ngày%20mai">ngày mai</span>.
   </p>
@@ -407,7 +406,7 @@
     <span class="word" data-vi="bạn thân" data-ru="лучшими друзьями" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bạn%20thân">bạn thân</span>. 
     <span class="word" data-vi="Chúng" data-ru="они" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Chúng">Chúng</span> 
     <span class="word" data-vi="luôn" data-ru="всегда" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=luôn">luôn</span> 
-    <span class="word" data-vi="giúp đỡ" data-ru="помогают" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=giúp%20đỡ">giúp đỡ</span> 
+    <span class="word" data-vi="giúp đỡ" data-ru="помогают" data-audio="https://translate.google.com/translate_tts?ee=UTF-8&tl=vi&client=gtx&q=giúp%20đỡ">giúp đỡ</span> 
     <span class="word" data-vi="nhau" data-ru="друг другу" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=nhau">nhau</span> 
     <span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
     <span class="word" data-vi="chia sẻ" data-ru="делятся" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=chia%20sẻ">chia sẻ</span> 
@@ -423,62 +422,34 @@
     <span class="word" data-vi="vào" data-ru="в" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vào">vào</span> 
     <span class="word" data-vi="vẻ ngoài" data-ru="внешность" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=vẻ%20ngoài">vẻ ngoài</span> 
     <span class="word" data-vi="và" data-ru="и" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=và">và</span> 
-    <span class="word" data-vi="luôn" data-ru="всегда" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=luôn">luôn</span> 
-    <span class="word" data-vi="giúp đỡ" data-ru="помогай" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=giúp%20đỡ">giúp đỡ</span> 
-    <span class="word" data-vi="bạn bè" data-ru="друзьям" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bạn%20bè">bạn bè</span>. 
-    <span class="word" data-vi="Cám ơn" data-ru="спасибо" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=Cám%20ơn">Cám ơn</span> 
-    <span class="word" data-vi="bạn" data-ru="тебе" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=bạn">bạn</span> 
-    <span class="word" data-vi="đã" data-ru="уже" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đã">đã</span> 
-    <span class="word" data-vi="đọc" data-ru="прочитал" data-audio="https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=gtx&q=đọc">đọc</span>!
+    <span class="word" data-vi="luôn" data-ru="всегда" data-audio="">luôn</span> 
+    <span class="word" data-vi="giúp đỡ" data-ru="помогай" data-audio="">giúp đỡ</span> 
+    <span class="word" data-vi="bạn bè" data-ru="друзьям" data-audio="">bạn bè</span>. 
+    <span class="word" data-vi="Cám ơn" data-ru="спасибо" data-audio="">Cám ơn</span> 
+    <span class="word" data-vi="bạn" data-ru="тебе" data-audio="">bạn</span> 
+    <span class="word" data-vi="đã" data-ru="уже" data-audio="">đã</span> 
+    <span class="word" data-vi="đọc" data-ru="прочитал" data-audio="">đọc</span>!
   </p>
 
-  <!-- Кнопки управления Telegram Web App -->
-  <button class="tg-button" id="mainButton" style="display: none;">Закрыть приложение</button>
   <button class="tg-button tg-close" id="closeButton" style="display: none;">Закрыть</button>
 </div>
 
 <script>
-// Инициализация Telegram Web App
 document.addEventListener('DOMContentLoaded', () => {
-  // Проверка, что мы в Telegram Web App
-  if (window.Telegram && window.Telegram.WebApp) {
+  // Telegram Web App
+  if (window.Telegram?.WebApp) {
     const webApp = window.Telegram.WebApp;
-    
-    // Сообщаем Telegram, что приложение готово
     webApp.ready();
-    
-    // Расширяем приложение на весь экран
     webApp.expand();
     
-    // Получаем информацию о пользователе
-    const user = webApp.initDataUnsafe.user;
-    const theme = webApp.colorScheme;
-    
-    // Адаптация под тему Telegram
-    if (theme === 'dark') {
+    if (webApp.colorScheme === 'dark') {
       document.body.classList.add('tg-dark');
     }
     
-    // Отображение информации о пользователе
+    const user = webApp.initDataUnsafe.user;
     if (user) {
-      const tgInfo = document.getElementById('tg-info');
-      tgInfo.innerHTML = `
-        <strong>Привет, ${user.first_name}!</strong><br>
-        Это приложение запущено в Telegram.<br>
-        Ваш ID: ${user.id}
-      `;
-      tgInfo.style.display = 'block';
-    }
-    
-    // Настройка главной кнопки
-    const mainButton = webApp.MainButton;
-    if (mainButton) {
-      mainButton.text = "Закрыть приложение";
-      mainButton.show();
-      
-      mainButton.onClick(() => {
-        webApp.close();
-      });
+      document.getElementById('tg-info').innerHTML = `<strong>Привет, ${user.first_name}!</strong> Нажимайте на слова для озвучивания.`;
+      document.getElementById('tg-info').style.display = 'block';
     }
     
     // Настройка кнопки закрытия
@@ -487,24 +458,36 @@ document.addEventListener('DOMContentLoaded', () => {
     closeButton.addEventListener('click', () => {
       webApp.close();
     });
-    
-    // Отправка события о запуске приложения
-    webApp.sendData("Приложение запущено пользователем: " + (user ? user.first_name : 'неизвестный'));
   }
   
-  // Функциональность воспроизведения аудио при наведении
+  // Звук по клику
+  let soundActive = false;
+  const soundBtn = document.getElementById('enableSound');
+  
+  soundBtn.onclick = () => {
+    soundActive = true;
+    soundBtn.textContent = '✅ Звук включен';
+    soundBtn.className = 'tg-button tg-button-success';
+    soundBtn.disabled = true;
+  };
+  
+  // Обработка кликов по словам
   document.querySelectorAll('.word').forEach(el => {
     const url = el.dataset.audio;
     const audio = new Audio(url);
     
-    el.addEventListener('mouseenter', () => {
+    el.onclick = () => {
+      if (!soundActive) {
+        alert('Для использования звука сначала нажмите кнопку "Включить звук"');
+        return;
+      }
+      
       audio.currentTime = 0;
-      audio.play().catch(e => console.log("Ошибка воспроизведения:", e));
-    });
-    
-    el.addEventListener('mouseleave', () => {
-      audio.pause();
-    });
+      audio.play().catch(e => {
+        console.log("Ошибка воспроизведения:", e);
+        alert('Ошибка воспроизведения звука. Проверьте подключение к интернету.');
+      });
+    };
   });
 });
 </script>
