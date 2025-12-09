@@ -445,22 +445,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (webApp.colorScheme === 'dark') {
       document.body.classList.add('tg-dark');
     }
-    
-    const user = webApp.initDataUnsafe.user;
-    if (user) {
-      document.getElementById('tg-info').innerHTML = `<strong>Привет, ${user.first_name}!</strong> Нажимайте на слова для озвучивания.`;
-      document.getElementById('tg-info').style.display = 'block';
-    }
-    
-    // Настройка кнопки закрытия
-    const closeButton = document.getElementById('closeButton');
-    closeButton.style.display = 'block';
-    closeButton.addEventListener('click', () => {
-      webApp.close();
-    });
   }
   
-  // Звук по клику с улучшенной обработкой ошибок
+  // Простая реализация звука
   let soundActive = false;
   const soundBtn = document.getElementById('enableSound');
   
@@ -469,85 +456,31 @@ document.addEventListener('DOMContentLoaded', () => {
     soundBtn.textContent = '✅ Звук включен';
     soundBtn.className = 'tg-button tg-button-success';
     soundBtn.disabled = true;
+    
+    // Тестовое воспроизведение для активации аудио
+    const testAudio = new Audio();
+    testAudio.src = 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjyW3/XIei0FJHfJ79WINA';
+    testAudio.play().catch(() => {});
   };
   
-  // Создаем функцию для воспроизведения с проверкой доступности
-  function playAudio(url, word) {
-    return new Promise((resolve, reject) => {
-      const audio = new Audio();
-      
-      audio.preload = 'none';
-      audio.src = url;
-      
-      audio.addEventListener('canplaythrough', () => {
-        audio.play()
-          .then(resolve)
-          .catch(reject);
-      });
-      
-      audio.addEventListener('error', () => {
-        reject(new Error('Audio loading failed'));
-      });
-      
-      // Пробуем альтернативный URL если основной не работает
-      setTimeout(() => {
-        if (audio.readyState < 2) { // Not loaded yet
-          // Альтернативный URL без сложных параметров
-          const altUrl = `https://translate.google.com/translate_tts?tl=vi&q=${encodeURIComponent(word)}`;
-          audio.src = altUrl;
-        }
-      }, 500);
-      
-      setTimeout(() => reject(new Error('Timeout')), 3000);
-    });
-  }
-  
-  // Обработка кликов по словам с улучшенной обработкой ошибок
+  // Базовая функция воспроизведения
   document.querySelectorAll('.word').forEach(el => {
-    const word = el.dataset.vi;
-    const url = el.dataset.audio;
-    
-    el.onclick = async () => {
+    el.onclick = () => {
       if (!soundActive) {
-        alert('Для использования звука сначала нажмите кнопку "Включить звук"');
+        alert('Нажмите "Включить звук"');
         return;
       }
       
-      try {
-        // Показываем индикатор загрузки
-        el.style.background = '#ffeaa7';
-        
-        await playAudio(url, word);
-        
-        // Возвращаем обычный вид после успешного воспроизведения
-        setTimeout(() => {
-          el.style.background = '';
-        }, 500);
-        
-      } catch (error) {
-        console.log("Ошибка воспроизведения:", error);
-        
-        // Пробуем простой вариант без параметров
-        try {
-          const simpleUrl = `https://translate.google.com/translate_tts?tl=vi&q=${encodeURIComponent(word)}`;
-          const audio = new Audio(simpleUrl);
-          await audio.play();
-        } catch (secondError) {
-          // Если и это не работает, показываем сообщение
-          alert(`Не удалось воспроизвести слово "${word}".\nПопробуйте позже или проверьте настройки браузера.`);
-        }
-        
-        el.style.background = '';
-      }
+      const word = el.dataset.vi;
+      // Простой URL без сложных параметров
+      const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&q=${encodeURIComponent(word)}`;
+      
+      const audio = new Audio(audioUrl);
+      audio.play().catch(e => {
+        console.log('Audio error:', e);
+        // Тихий режим - просто не показываем ошибку
+      });
     };
-  });
-  
-  // Добавляем обработку касания для мобильных устройств
-  document.querySelectorAll('.word').forEach(el => {
-    el.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      el.click();
-    });
   });
 });
 </script>
